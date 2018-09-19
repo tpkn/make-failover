@@ -1,3 +1,7 @@
+/*!
+ * Make Failover, http://tpkn.me/
+ */
+
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
@@ -15,7 +19,7 @@ function makeFailover(width, height, output_path, options = {}){
       let cmd = [];
       let failover_path;
 
-      // Set converter.exe
+      // Set convert.exe
       let bin = path.join('./bin/', 'convert.exe');
       if(typeof options.bin === 'string' && fs.existsSync(options.bin)){
          bin = options.bin;
