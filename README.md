@@ -27,7 +27,7 @@ Output file path with extension (`.jpg`, `.png`, `.gif`, `.svg`, ...)
 ### options.bin
 **Type**: _String_    
 **Default**: `./bin/convert.exe`  
-Path to `converter.exe` file. This binary is not included, you can [download it from here](https://imagemagick.org/script/download.php). 
+Path to `convert.exe` file. This binary is not included, but you can [download it from here](https://imagemagick.org/script/download.php). 
 
 
 
