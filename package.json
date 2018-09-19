@@ -1,0 +1,20 @@
+{
+   "name": "make-failover",
+   "main": "make-failover.js",
+   "version": "1.0.0",
+   "author": {
+      "url": "https://github.com/tpkn/"
+   },
+   "repository": "https://github.com/tpkn/make-failover",
+   "license": "MIT",
+   "keywords": [
+      "banner",
+      "image",
+      "failover",
+      "imagemagick",
+      "image",
+      "fail",
+      "convert",
+      "converter"
+   ]
+}
