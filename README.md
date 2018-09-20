@@ -52,6 +52,18 @@ Border stroke size
 **Default**: : `#ffffff`  
 
 
+### options.enable_macros
+**Type**: _Boolean_   
+**Default**: : `false`  
+Enable/disable replacing macros in output file name
+
+| Macros | Result |
+| ------ | ------ |
+| `%size%` | `300x250` |
+| `%time%` | `1537450293541` |
+| `%uniq%` | `jmam7jgr0r` |
+
+
 
 
 
@@ -64,14 +76,15 @@ const MakeFailover = require('make-failover');
 
    let width = 300;
    let height = 250;
-   let output = path.join(__dirname, Date.now() + '.jpg')
+   let output = path.join(__dirname, 'failover_%uniq%.jpg')
    
    let failover = await MakeFailover(width, height, output, {
+		enable_macros: true, 
       border_stroke: 20,
       border_color: '#ff9900',
       bg_color: '#00ffbb',
       quality: 90
-   }); // => C:/make-failover/1537383269062.jpg
+   }); // => C:/make-failover/failover_jmaurzq656o.jpg
 
 })();
 ```

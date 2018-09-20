@@ -8,6 +8,34 @@ const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 
 /**
+ * Replace macros
+ * @param  {String} str   './test/failover_%size%.jpg'
+ * @param  {Object} data  { width, height }
+ * @return {String}       './test/failover_300x250.jpg'
+ */
+function replaceMacros(str, data){
+   let parts = path.parse(str);
+   let { width, height } = data;
+
+   let dir = parts.dir;
+   let filename = parts.base;
+
+   if(filename.indexOf('%size%') > -1){
+      filename = filename.replace('%size%', width + 'x' + height);
+   }
+
+   if(filename.indexOf('%uniq%') > -1){
+      filename = filename.replace('%uniq%', (Date.now() + Math.random()).toString(36).replace('.', ''));
+   }
+
+   if(filename.indexOf('%time%') > -1){
+      filename = filename.replace('%time%', Date.now());
+   }
+
+   return path.join(dir, filename);
+}
+
+/**
  * @param  {Number} width
  * @param  {Number} height
  * @param  {String} output_path
@@ -41,6 +69,11 @@ function makeFailover(width, height, output_path, options = {}){
             throw new Error(`${output_path} path is not set`)
          }
 
+         // Check if the output file path is set
+         if(typeof output_path !== 'string'){
+            throw new Error(`${output_path} path is not set`)
+         }
+
          // Set image quality
          let quality = 75;
          if(typeof options.quality === 'number'){
@@ -63,6 +96,12 @@ function makeFailover(width, height, output_path, options = {}){
          let bg_color = '#ffffff';
          if(typeof options.bg_color === 'string' && /^#[a-f0-9]{6}$/i.test(options.bg_color)){
             bg_color = options.bg_color;
+         }
+
+         // Replce macros in filename
+         let enable_macros = false;
+         if(typeof options.enable_macros === 'boolean' && options.enable_macros){
+            output_path = replaceMacros(output_path, { width, height, quality, border_stroke, border_color, bg_color });
          }
 
          // Subtract border's stroke size from overall size 
