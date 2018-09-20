@@ -79,7 +79,7 @@ const MakeFailover = require('make-failover');
    let output = path.join(__dirname, 'failover_%uniq%.jpg')
    
    let failover = await MakeFailover(width, height, output, {
-		enable_macros: true, 
+      enable_macros: true, 
       border_stroke: 20,
       border_color: '#ff9900',
       bg_color: '#00ffbb',
