@@ -5,6 +5,12 @@ Making failover images with a blink of an eye
 A silent module based on [ImageMagick](https://imagemagick.org) for making failover images with specified properties.
 
 
+## Installation
+```bash
+npm install make-failover
+```
+
+
 
 ## API
 
