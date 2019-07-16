@@ -1,4 +1,4 @@
-# Make Failover   
+# Make Failover [![npm Package](https://img.shields.io/npm/v/make-failover.svg)](https://www.npmjs.org/package/make-failover)
 Making failover images with a blink of an eye
 
 
