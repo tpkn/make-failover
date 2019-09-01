@@ -6,7 +6,7 @@ const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-async function makeFailover(width, height, output_path, options = {}){
+async function makeFailover(output_path, width, height, options = {}){
    if(typeof width !== 'number' || width < 1 || width > 99999){
       throw new Error('No valid width')
    }

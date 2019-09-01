@@ -9,7 +9,7 @@ A silent module based on [ImageMagick](https://imagemagick.org) for making failo
 ## API
 
 ```javascript
-await MakeFailover(width, height, output_path[, options])
+await MakeFailover(output_path, width, height[, options])
 ```
 
 ### width   
@@ -61,6 +61,8 @@ Enable/disable replacing macros in output file name
 
 | Macros | Result |
 | ------ | ------ |
+| `%width%` | `300` |
+| `%height%` | `250` |
 | `%size%` | `300x250` |
 | `%time%` | `1537450293541` |
 | `%uniq%` | `jmam7jgr0r` |
@@ -74,21 +76,21 @@ Enable/disable replacing macros in output file name
 const path = require('path');
 const MakeFailover = require('make-failover');
 
-(async () => {
+let width = 300;
+let height = 250;
+let output = path.join(__dirname, 'failover_%uniq%.jpg')
 
-   let width = 300;
-   let height = 250;
-   let output = path.join(__dirname, 'failover_%uniq%.jpg')
-   
-   let failover = await MakeFailover(width, height, output, {
-      enable_macros: true, 
-      border_stroke: 20,
-      border_color: '#ff9900',
-      bg_color: '#00ffbb',
-      quality: 90
-   }); // => C:/make-failover/failover_jmaurzq656o.jpg
-
-})();
+MakeFailover(width, height, output, {
+   enable_macros: true, 
+   border_stroke: 20,
+   border_color: '#ff9900',
+   bg_color: '#00ffbb',
+   quality: 90
+})
+.then(result => {
+	// => C:/make-failover/failover_jmam7jgr0r.jpg
+})
+.catch(err => {})
 ```
 
 
