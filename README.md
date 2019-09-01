@@ -40,23 +40,23 @@ Path to `convert.exe` file. This binary is not included, but you can [download i
 
 ### options.border_stroke
 **Type**: _Number_   
-**Default**: : `1`  
+**Default**: `1`  
 Border stroke size
 
 
 ### options.border_color
 **Type**: _String_   
-**Default**: : `#000000`  
+**Default**: `#000000`  
 
 
 ### options.bg_color
 **Type**: _String_   
-**Default**: : `#ffffff`  
+**Default**: `#ffffff`  
 
 
 ### options.enable_macros
 **Type**: _Boolean_   
-**Default**: : `false`  
+**Default**: `false`  
 Enable/disable replacing macros in output file name
 
 | Macros | Result |
