@@ -88,7 +88,7 @@ MakeFailover(width, height, output, {
    quality: 90
 })
 .then(result => {
-	// => C:/make-failover/failover_jmam7jgr0r.jpg
+   // => C:/make-failover/failover_jmam7jgr0r.jpg
 })
 .catch(err => {})
 ```
