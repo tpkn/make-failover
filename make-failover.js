@@ -3,31 +3,19 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('util');
-const exec = promisify(require('child_process').exec);
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
-/**
- * @param  {Number} width
- * @param  {Number} height
- * @param  {String} output_path
- * @param  {Object} options       { bin, quality, border_stroke, border_color, bg_color }
- * @return {String}               path to the failover file | null
- */
 async function makeFailover(width, height, output_path, options = {}){
-   // Check if the size is valid (0x0 - 99999x99999)
    if(typeof width !== 'number' || width < 1 || width > 99999){
       throw new Error('No valid width')
    }
-
    if(typeof height !== 'number' || height < 1 || height > 99999){
       throw new Error('No valid height')
    }
-
-   // Check if the output file path is set
    if(typeof output_path !== 'string'){
       throw new Error(`Output file path is not set`)
    }
-
 
    let {
       
@@ -40,7 +28,7 @@ async function makeFailover(width, height, output_path, options = {}){
 
    } = options;
 
-   // Replce macros in filename
+   // Replace macros in filename
    if(enable_macros){
       output_path = replaceMacros(output_path, { 
          width, height, quality, 
@@ -58,6 +46,7 @@ async function makeFailover(width, height, output_path, options = {}){
 
 /**
  * Replace macros
+ * 
  * @param  {String} str   './test/failover_%size%.jpg'
  * @param  {Object} data  { width, height }
  * @return {String}       './test/failover_300x250.jpg'
@@ -69,16 +58,24 @@ function replaceMacros(str, data){
    let dir = parts.dir;
    let filename = parts.base;
 
-   if(filename.indexOf('%size%') > -1){
-      filename = filename.replace('%size%', width + 'x' + height);
+   if(filename.indexOf('%width%') != -1){
+      filename = filename.replace(/%width%/g, width);
    }
 
-   if(filename.indexOf('%uniq%') > -1){
-      filename = filename.replace('%uniq%', (Date.now() + Math.random()).toString(36).replace('.', ''));
+   if(filename.indexOf('%height%') != -1){
+      filename = filename.replace(/%height%/g, height);
    }
 
-   if(filename.indexOf('%time%') > -1){
-      filename = filename.replace('%time%', Date.now());
+   if(filename.indexOf('%size%') != -1){
+      filename = filename.replace(/%size%/g, width + 'x' + height);
+   }
+
+   if(filename.indexOf('%uniq%') != -1){
+      filename = filename.replace(/%uniq%/g,  (Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Date.now()).toString(36).replace('.', ''));
+   }
+
+   if(filename.indexOf('%time%') != -1){
+      filename = filename.replace(/%time%/g, Date.now());
    }
 
    return path.join(dir, filename);
