@@ -12,6 +12,11 @@ A silent module based on [ImageMagick](https://imagemagick.org) for making failo
 await MakeFailover(output_path, width, height[, options])
 ```
 
+### output_path  
+**Type**: _String_  
+Output file path with extension (`.jpg`, `.png`, `.gif`, `.svg`, ...)
+
+
 ### width   
 **Type**: _Number_  
 Image width, `> 0` and `<= 99999` pixels
@@ -19,11 +24,6 @@ Image width, `> 0` and `<= 99999` pixels
 ### height   
 **Type**: _Number_   
 Image height, `> 0` and `<= 99999` pixels
-
-
-### output_path  
-**Type**: _String_  
-Output file path with extension (`.jpg`, `.png`, `.gif`, `.svg`, ...)
 
 
 ### options.bin
